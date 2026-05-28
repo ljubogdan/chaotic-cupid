@@ -11,13 +11,13 @@
 </p>
 
 <p align="center">
-  <a href="#english">English</a> &nbsp;·&nbsp; <a href="#srpski">Srpski</a>
+  <a href="#english">English</a>  ·  <a href="#srpski">Srpski</a>
 </p>
 
 ---
 
 <a name="english"></a>
-## [ EN ] &nbsp; Technical Documentation
+## [ EN ]   Technical Documentation
 
 ChaoticCupid is a real-time matchmaking simulation system built on .NET 8. It demonstrates modern distributed application patterns — asynchronous communication, background processing, and thread-safe state management — through a PubSub architecture powered by ASP.NET Core SignalR.
 
@@ -72,7 +72,7 @@ The candidate with the highest score becomes the letter sender. The random eleme
 ---
 
 <a name="srpski"></a>
-## [ SR ] &nbsp; Dokumentacija
+## [ SR ]   Dokumentacija
 
 ChaoticCupid je sistem za simulaciju provodadžisanja u realnom vremenu, izgrađen na .NET 8 platformi. Projekat demonstrira moderne obrasce distribuiranih aplikacija — asinhronu komunikaciju, pozadinsku obradu i bezbedno upravljanje stanjem u višenitnom okruženju — kroz PubSub arhitekturu zasnovanu na ASP.NET Core SignalR-u.
 
@@ -126,7 +126,7 @@ Kandidat sa najvišim skorom postaje pošiljalac pisma. Nasumični element gener
 
 ---
 
-## [ ! ] &nbsp; Getting Started / Pokretanje
+## [ ! ]   Getting Started / Pokretanje
 
 ### Preduslovi / Prerequisites
 - .NET 8.0 SDK
