@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.SignalR.Client;
 
-const string ServerUrl = "http://localhost:5000/cupid";
+record LoveLetter(string FromUsername, string FromCity, int FromYear, string FromPhone, string Message);
+
+const string ServerUrl = "http://localhost:5104/cupid";
 
 var connection = new HubConnectionBuilder()
     .WithUrl(ServerUrl)
@@ -32,23 +34,22 @@ connection.On<string>("LetterConfirmed", _ =>
     Console.WriteLine("[INFO] Možete primati nova pisma.");
 });
 
-connection.On<dynamic>("ReceiveLetter", letter =>
+connection.On<LoveLetter>("ReceiveLetter", letter =>
 {
     hasPendingLetter = true;
 
-    Console.WriteLine("\n╔══════════════════════════════════════╗");
-    Console.WriteLine("║          💌 NOVO PISMO OD KUPIDONA    ║");
-    Console.WriteLine("╚══════════════════════════════════════╝");
-    Console.WriteLine($"  Korisnik : {letter.fromUsername}");
-    Console.WriteLine($"  Grad     : {letter.fromCity}");
-    Console.WriteLine($"  Godište  : {letter.fromYear}");
+    Console.WriteLine("\n=========================================");
+    Console.WriteLine("         NOVO PISMO OD KUPIDONA");
+    Console.WriteLine("=========================================");
+    Console.WriteLine($"  Korisnik : {letter.FromUsername}");
+    Console.WriteLine($"  Grad     : {letter.FromCity}");
+    Console.WriteLine($"  Godiste  : {letter.FromYear}");
 
-    string phone = letter.fromPhone?.ToString() ?? string.Empty;
-    if (!string.IsNullOrEmpty(phone))
-        Console.WriteLine($"  Telefon  : {phone}");
+    if (!string.IsNullOrEmpty(letter.FromPhone))
+        Console.WriteLine($"  Telefon  : {letter.FromPhone}");
 
-    Console.WriteLine($"  Poruka   : \"{letter.message}\"");
-    Console.WriteLine("────────────────────────────────────────");
+    Console.WriteLine($"  Poruka   : \"{letter.Message}\"");
+    Console.WriteLine("-----------------------------------------");
     Console.WriteLine("Pritisnite ENTER da potvrdite prijem pisma.");
 });
 
