@@ -3,8 +3,8 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/.NET-8.0-512BD4?style=flat-square&logo=dotnet"/>
-  <img src="https://img.shields.io/badge/C%23-12.0-239120?style=flat-square&logo=csharp"/>
+  <img src="https://img.shields.io/badge/.NET-8.0-512BD4?style=flat-square&amp;logo=dotnet"/>
+  <img src="https://img.shields.io/badge/C%23-12.0-239120?style=flat-square&amp;logo=csharp"/>
   <img src="https://img.shields.io/badge/SignalR-Real--time-e0457b?style=flat-square"/>
   <img src="https://img.shields.io/badge/Spectre.Console-UI-blueviolet?style=flat-square"/>
   <img src="https://img.shields.io/badge/Platform-Cross--platform-blue?style=flat-square"/>
