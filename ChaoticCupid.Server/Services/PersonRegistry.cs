@@ -5,7 +5,7 @@ namespace ChaoticCupid.Server.Services;
 public class PersonRegistry
 {
     private readonly Dictionary<string, Person> _persons = new(StringComparer.OrdinalIgnoreCase);
-    private readonly Lock _lock = new();
+    private readonly object _lock = new();
 
     public bool TryRegister(Person person)
     {

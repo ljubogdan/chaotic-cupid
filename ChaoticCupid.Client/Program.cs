@@ -1,7 +1,5 @@
 using Microsoft.AspNetCore.SignalR.Client;
 
-record LoveLetter(string FromUsername, string FromCity, int FromYear, string FromPhone, string Message);
-
 const string ServerUrl = "http://localhost:5104/cupid";
 
 var connection = new HubConnectionBuilder()
@@ -9,13 +7,11 @@ var connection = new HubConnectionBuilder()
     .WithAutomaticReconnect()
     .Build();
 
-bool isRegistered = false;
 bool hasPendingLetter = false;
 
 connection.On<string>("Registered", msg =>
 {
     Console.WriteLine($"\n[SERVER] {msg}");
-    isRegistered = true;
 });
 
 connection.On<string>("Error", msg =>
@@ -123,3 +119,5 @@ static int ReadPositiveInt(string prompt)
         return value;
     }
 }
+
+record LoveLetter(string FromUsername, string FromCity, int FromYear, string FromPhone, string Message);
