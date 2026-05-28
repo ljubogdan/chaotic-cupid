@@ -1,102 +1,156 @@
-# ChaoticCupid
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=12&height=220&section=header&text=Chaotic%20Cupid&fontSize=72&fontColor=fff&animation=fadeIn&fontAlignY=42&desc=Real-time%20matchmaking%20%7C%20ASP.NET%20Core%20%26%20SignalR&descSize=18&descAlignY=64&descAlign=50"/>
+</p>
 
-![.NET](https://img.shields.io/badge/.NET-8.0-512BD4?style=flat-square&logo=dotnet)
-![C#](https://img.shields.io/badge/C%23-12.0-239120?style=flat-square&logo=csharp)
-![SignalR](https://img.shields.io/badge/SignalR-Real--time-orange?style=flat-square)
-![Platform](https://img.shields.io/badge/Platform-Cross--platform-blue?style=flat-square)
+<p align="center">
+  <img src="https://img.shields.io/badge/.NET-8.0-512BD4?style=flat-square&logo=dotnet"/>
+  <img src="https://img.shields.io/badge/C%23-12.0-239120?style=flat-square&logo=csharp"/>
+  <img src="https://img.shields.io/badge/SignalR-Real--time-e0457b?style=flat-square"/>
+  <img src="https://img.shields.io/badge/Spectre.Console-UI-blueviolet?style=flat-square"/>
+  <img src="https://img.shields.io/badge/Platform-Cross--platform-blue?style=flat-square"/>
+</p>
 
-[English](#english) | [Srpski](#srpski)
+<p align="center">
+  <a href="#english">English</a> &nbsp;·&nbsp; <a href="#srpski">Srpski</a>
+</p>
 
 ---
 
 <a name="english"></a>
-## [ EN ] Technical Documentation
+## [ EN ] &nbsp; Technical Documentation
 
-ChaoticCupid is a robust, real-time matchmaking simulation system built using the .NET 8 framework. It serves as a practical demonstration of modern distributed application patterns, focusing on asynchronous communication, background processing, and thread-safe state management.
+ChaoticCupid is a real-time matchmaking simulation system built on .NET 8. It demonstrates modern distributed application patterns — asynchronous communication, background processing, and thread-safe state management — through a PubSub architecture powered by ASP.NET Core SignalR.
+
+<br>
 
 ### » System Architecture
 
-The project follows a decoupled client-server architecture, leveraging the power of WebSockets through ASP.NET Core SignalR for low-latency, bi-directional communication.
+The project follows a decoupled client-server model using WebSockets for low-latency, bi-directional communication.
 
-#### 1. ChaoticCupid.Server
+#### ◆ ChaoticCupid.Server
+
 The backbone of the system, responsible for orchestration and business logic:
-*   **Registry Management**: Utilizes a centralized, thread-safe `PersonRegistry` to track active users.
-*   **SignalR Hub**: The `CupidHub` manages lifecycle events (connection/disconnection) and provides a secure interface for client interactions.
-*   **Asynchronous Orchestrator**: A `BackgroundService` implementation (`CupidService`) that operates independently of the request-response cycle to perform heavy computational tasks (matchmaking).
 
-#### 2. ChaoticCupid.Client
-A high-performance terminal-based interface:
-*   **Interactive UI**: Built with `Spectre.Console` to provide a rich, user-friendly experience in a CLI environment.
-*   **Command Dispatcher**: Implements a custom input handler with support for tab-completion and command-line arguments (e.g., `/block`).
-*   **State Awareness**: Maintains a local state to handle complex flows like message confirmation and blocking logic.
+- **Registry Management** — a centralized, thread-safe `PersonRegistry` tracks all active users
+- **SignalR Hub** — `CupidHub` manages connection lifecycle and exposes the client-facing interface
+- **Background Orchestrator** — `CupidService` runs independently of the request cycle, executing matchmaking every 60 seconds
 
-### » Technical Implementation Details
+#### ◆ ChaoticCupid.Client
 
-#### ◈ Thread-Safe State Management
-To ensure reliability in a multi-threaded environment, the `PersonRegistry` implements manual locking mechanisms. This prevents race conditions during high-concurrency registration and disconnection phases, ensuring data integrity for the matchmaking algorithm.
+A terminal-based interface built for clarity:
 
-#### ◈ Matchmaking Heuristics
-The matching algorithm is designed to simulate complex social dynamics. It processes candidates based on a weighted scoring system:
-*   **Regional Affinity (30 pts)**: Prioritizes users within the same geographic location.
-*   **Age Compatibility (20 pts)**: Favors profiles within a specific age range (+/- 2 years).
-*   **Stochastic Factor (0-100 pts)**: Introduces a randomized element to prevent deterministic outcomes and enhance the "chaotic" nature of the service.
+- **Rich UI** — powered by `Spectre.Console` with colored panels, styled prompts, and a FigletText banner
+- **Command Input** — custom keystroke handler with tab-completion for `/block`
+- **State Management** — tracks pending letter confirmation and blocked users locally
+
+<br>
+
+### » Technical Implementation
+
+#### ◆ Thread-Safe State
+
+`PersonRegistry` uses manual `lock` blocks to prevent race conditions during concurrent registrations and disconnections, ensuring data integrity throughout the matchmaking cycle.
+
+#### ◆ Matchmaking Algorithm
+
+Candidates are scored against each recipient using a weighted system:
+
+| Factor | Points |
+|---|---|
+| Same city | +30 |
+| Age within ±2 years | +20 |
+| Cryptographic random factor | +0 to 100 |
+
+The candidate with the highest score becomes the letter sender. The random element is generated via `RandomNumberGenerator` (`System.Security.Cryptography`) — the modern equivalent of `RNGCryptoServiceProvider`.
+
+#### ◆ Connection Resilience
+
+- On startup, the client retries every 3 seconds until the server responds
+- If the server drops during a session, a `Closed` event notifies the user to restart
+- Automatic reconnect is intentionally disabled — the server holds state in memory and would not recognize a reconnected client
 
 ---
 
 <a name="srpski"></a>
-## [ SR ] Dokumentacija na srpskom jeziku
+## [ SR ] &nbsp; Dokumentacija
 
-ChaoticCupid je robustan sistem za simulaciju provodadžisanja (matchmaking) u realnom vremenu, izgrađen korišćenjem .NET 8 radnog okvira. Projekat predstavlja praktičnu demonstraciju modernih obrazaca distribuiranih aplikacija, sa fokusom na asinhronu komunikaciju, pozadinsku obradu podataka i bezbedno upravljanje stanjima u višenitnom okruženju.
+ChaoticCupid je sistem za simulaciju provodadžisanja u realnom vremenu, izgrađen na .NET 8 platformi. Projekat demonstrira moderne obrasce distribuiranih aplikacija — asinhronu komunikaciju, pozadinsku obradu i bezbedno upravljanje stanjem u višenitnom okruženju — kroz PubSub arhitekturu zasnovanu na ASP.NET Core SignalR-u.
+
+<br>
 
 ### » Arhitektura Sistema
 
-Projekat se oslanja na razdvojenu klijent-server arhitekturu, koristeći snagu WebSockets tehnologije putem ASP.NET Core SignalR-a za dvosmernu komunikaciju sa niskim kašnjenjem.
+Projekat koristi razdvojenu klijent-server arhitekturu uz WebSocket konekciju za dvosmernu komunikaciju sa niskim kašnjenjem.
 
-#### 1. ChaoticCupid.Server
+#### ◆ ChaoticCupid.Server
+
 Okosnica sistema zadužena za orkestraciju i poslovnu logiku:
-*   **Upravljanje Registrom**: Koristi centralizovani, thread-safe `PersonRegistry` za praćenje aktivnih korisnika.
-*   **SignalR Hub**: `CupidHub` upravlja životnim ciklusom konekcija (povezivanje/prekidanje) i pruža siguran interfejs za interakciju sa klijentima.
-*   **Asinhroni Orkestrator**: Implementacija `BackgroundService` klase (`CupidService`) koja radi nezavisno od request-response ciklusa kako bi izvršavala računski intenzivne zadatke (mečovanje).
 
-#### 2. ChaoticCupid.Client
-Terminalni interfejs visokih performansi:
-*   **Interaktivni UI**: Izgrađen pomoću `Spectre.Console` biblioteke kako bi pružio bogato i intuitivno korisničko iskustvo u CLI okruženju.
-*   **Upravljanje Komandama**: Implementira prilagođeni hendler za unos sa podrškom za tab-completion i argumente komandne linije (npr. `/block`).
-*   **Praćenje Stanja**: Održava lokalno stanje klijenta za upravljanje kompleksnim tokovima poput potvrde prijema poruka i logike blokiranja.
+- **Upravljanje Registrom** — centralizovani, thread-safe `PersonRegistry` prati sve aktivne korisnike
+- **SignalR Hub** — `CupidHub` upravlja životnim ciklusom konekcija i pruža interfejs za klijente
+- **Pozadinski Orkestrator** — `CupidService` radi nezavisno od request ciklusa i izvršava mečovanje svakih 60 sekundi
 
-### » Detalji Tehničke Implementacije
+#### ◆ ChaoticCupid.Client
 
-#### ◈ Bezbedno Upravljanje Nitima (Thread-Safety)
-Kako bi se osigurala pouzdanost u višenitnom okruženju, `PersonRegistry` implementira manuelne mehanizme zaključavanja (locking). Ovo sprečava pojavu "race condition" situacija tokom faza registracije i diskonekcije, osiguravajući integritet podataka za algoritam mečovanja.
+Terminalni interfejs izgrađen za jasnoću i upotrebljivost:
 
-#### ◈ Heuristika Mečovanja
-Algoritam za pronalaženje parova dizajniran je da simulira kompleksnu društvenu dinamiku. Procesuiranje kandidata vrši se na osnovu sistema težinskih poena:
-*   **Regionalna Sličnost (30 poena)**: Prioritet imaju korisnici iz iste geografske lokacije (grada).
-*   **Kompatibilnost Godišta (20 poena)**: Favorizuju se profili unutar određenog raspona godina (+/- 2 godine).
-*   **Stohastički Faktor (0-100 poena)**: Uvodi element slučajnosti kako bi se izbegli deterministički ishodi i naglasila "haotična" priroda servisa.
+- **Bogati UI** — `Spectre.Console` sa obojenim panelima, stilizovanim promptovima i FigletText bannerom
+- **Unos Komandi** — prilagođeni hendler sa tab-completion podrškom za `/block`
+- **Praćenje Stanja** — lokalno upravljanje potvrdom pisama i listom blokiranih korisnika
+
+<br>
+
+### » Tehnička Implementacija
+
+#### ◆ Bezbednost Niti
+
+`PersonRegistry` koristi `lock` blokove za sprečavanje race condition situacija tokom istovremenih registracija i diskonekcija, čuvajući integritet podataka tokom celog ciklusa mečovanja.
+
+#### ◆ Algoritam Mečovanja
+
+Kandidati se boduju u odnosu na svakog primaoca prema sledećem sistemu:
+
+| Faktor | Poeni |
+|---|---|
+| Isti grad | +30 |
+| Godište u rasponu ±2 | +20 |
+| Kriptografski nasumični faktor | +0 do 100 |
+
+Kandidat sa najvišim skorom postaje pošiljalac pisma. Nasumični element generiše `RandomNumberGenerator` (`System.Security.Cryptography`) — moderna zamena za `RNGCryptoServiceProvider`.
+
+#### ◆ Otpornost Konekcije
+
+- Pri pokretanju, klijent pokušava konekciju svakih 3 sekunde dok server ne odgovori
+- Ako server padne tokom sesije, `Closed` event obaveštava korisnika da ponovo pokrene aplikaciju
+- Automatski reconnect je namerno isključen — server čuva stanje u memoriji i ne bi prepoznao ponovo konektovanog klijenta
 
 ---
 
-## [ ! ] Getting Started / Kako početi
+## [ ! ] &nbsp; Getting Started / Pokretanje
 
-### Prerequisites / Preduslovi
-*   .NET 8.0 SDK
+### Preduslovi / Prerequisites
+- .NET 8.0 SDK
 
-### Setup Instructions / Uputstvo za podešavanje
+### Pokretanje / Setup
 
-1. **Clone the Repository / Kloniraj repozitorijum**
-   ```bash
-   git clone git@github.com:ljubogdan/chaotic-cupid.git
-   cd chaotic-cupid
-   ```
+**1. Kloniraj repozitorijum / Clone the repository**
+```bash
+git clone git@github.com:ljubogdan/chaotic-cupid.git
+cd chaotic-cupid
+```
 
-2. **Launch the Server / Pokreni Server**
-   ```bash
-   dotnet run --project ChaoticCupid.Server
-   ```
-   The server will start listening on `http://localhost:5104`.
+**2. Pokreni server / Launch the server**
+```bash
+dotnet run --project ChaoticCupid.Server
+```
+Server sluša na `http://localhost:5104`.
 
-3. **Launch the Client / Pokreni Klijent**
-   ```bash
-   dotnet run --project ChaoticCupid.Client
-   ```
+**3. Pokreni klijent(e) / Launch client(s)**
+```bash
+dotnet run --project ChaoticCupid.Client
+```
+Svaki klijent se pokreće u posebnom terminalu.
+
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=12&height=120&section=footer"/>
+</p>
