@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&amp;color=gradient&amp;customColorList=12,24&amp;height=220&amp;section=header&amp;text=Chaotic%20Cupid&amp;fontSize=72&amp;fontColor=fff&amp;animation=fadeIn&amp;fontAlignY=42&amp;desc=Real-time%20matchmaking%20%7C%20ASP.NET%20Core%20%2B%20SignalR&amp;descSize=18&amp;descAlignY=64&amp;descAlign=50"/>
+  <img src="https://capsule-render.vercel.app/api?type=waving&amp;color=gradient&amp;customColorList=12&amp;height=220&amp;section=header&amp;text=Chaotic%20Cupid&amp;fontSize=72&amp;fontColor=fff&amp;animation=fadeIn&amp;fontAlignY=42&amp;desc=Real-time%20matchmaking%20%7C%20ASP.NET%20Core%20%2B%20SignalR&amp;descSize=18&amp;descAlignY=64&amp;descAlign=50"/>
 </p>
 
 <p align="center">
@@ -145,5 +145,5 @@ dotnet run --project ChaoticCupid.Client
 Each client runs in a separate terminal window.
 
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&amp;color=gradient&amp;customColorList=12,24&amp;height=120&amp;section=footer"/>
+  <img src="https://capsule-render.vercel.app/api?type=waving&amp;color=gradient&amp;customColorList=12&amp;height=120&amp;section=footer"/>
 </p>
