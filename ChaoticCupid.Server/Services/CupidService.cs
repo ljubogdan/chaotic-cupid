@@ -30,8 +30,18 @@ public class CupidService : BackgroundService, ICupidInterface
     {
         while (!stoppingToken.IsCancellationRequested)
         {
-            await Task.Delay(TimeSpan.FromMinutes(1), stoppingToken);
+            var nextRun = DateTime.Now.AddMinutes(1);
+
+            while (DateTime.Now < nextRun && !stoppingToken.IsCancellationRequested)
+            {
+                var remaining = nextRun - DateTime.Now;
+                Console.Write($"\r[Kupidon] Sledeći ciklus za: {(int)remaining.TotalSeconds:D2}s   ");
+                await Task.Delay(1000, stoppingToken);
+            }
+
+            Console.WriteLine("\r[Kupidon] Šaljem pisma...                    ");
             await SendLettersToAll();
+            Console.WriteLine("[Kupidon] Pisma poslata.");
         }
     }
 
