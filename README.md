@@ -1,5 +1,10 @@
 # ChaoticCupid
 
+![.NET](https://img.shields.io/badge/.NET-8.0-512BD4?style=flat-square&logo=dotnet)
+![C#](https://img.shields.io/badge/C%23-12.0-239120?style=flat-square&logo=csharp)
+![SignalR](https://img.shields.io/badge/SignalR-Real--time-orange?style=flat-square)
+![Platform](https://img.shields.io/badge/Platform-Cross--platform-blue?style=flat-square)
+
 [English](#english) | [Srpski](#srpski)
 
 ---
@@ -8,8 +13,6 @@
 ## [ EN ] Technical Documentation
 
 ChaoticCupid is a robust, real-time matchmaking simulation system built using the .NET 8 framework. It serves as a practical demonstration of modern distributed application patterns, focusing on asynchronous communication, background processing, and thread-safe state management.
-
-`#dotnet8` `#signalr` `#csharp` `#spectre-console` `#async` `#background-service`
 
 ### » System Architecture
 
@@ -44,8 +47,6 @@ The matching algorithm is designed to simulate complex social dynamics. It proce
 ## [ SR ] Dokumentacija na srpskom jeziku
 
 ChaoticCupid je robustan sistem za simulaciju provodadžisanja (matchmaking) u realnom vremenu, izgrađen korišćenjem .NET 8 radnog okvira. Projekat predstavlja praktičnu demonstraciju modernih obrazaca distribuiranih aplikacija, sa fokusom na asinhronu komunikaciju, pozadinsku obradu podataka i bezbedno upravljanje stanjima u višenitnom okruženju.
-
-`#dotnet8` `#signalr` `#csharp` `#spectre-console` `#asinhrono` `#pozadinski-servisi`
 
 ### » Arhitektura Sistema
 
